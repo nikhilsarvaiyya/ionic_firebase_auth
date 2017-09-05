@@ -7,6 +7,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { IonicStorageModule } from '@ionic/storage';
+import { Camera } from '@ionic-native/camera';
 
 import firebase from 'firebase'
 
@@ -34,6 +36,7 @@ firebase.initializeApp(firebaseConfig)
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,7 +50,9 @@ firebase.initializeApp(firebaseConfig)
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
     AngularFireAuth,
-    AngularFireDatabase
+    AngularFireDatabase,
+    Camera
+   
   ]
 })
 export class AppModule {}

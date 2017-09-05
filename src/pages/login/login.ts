@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController,LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Storage } from '@ionic/storage';
+
 import * as firebase from 'firebase';
 import { GooglePlus } from '@ionic-native/google-plus';
 
@@ -21,16 +23,22 @@ export class LoginPage {
 		public alertCtrl: AlertController,
 		public toastCtrl: ToastController,
 		public loadingCtrl: LoadingController,
-		
+		public storage: Storage
 		) {
 
 		this.afAuth.authState.subscribe((auth) => {
-			this.authState = auth
+
+			this.authState = auth;
+			console.log("Detail",this.authState);
+			window.localStorage.setItem('userDetails', JSON.stringify(this.authState));
+			
+			//this.storage.set('userDetail', this.authState);
+
 		});
 	}
 
 	ionViewDidLoad() {
-		console.log('ionViewDidLoad LoginPage');
+		//console.log('ionViewDidLoad LoginPage');
 	}
 
 	emailLogin(email:string, password:string) {

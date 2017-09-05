@@ -1,12 +1,44 @@
 <ion-header>
-	<ion-navbar>
-		<ion-title>
-			Demo App
-		</ion-title>
-	</ion-navbar>
+	<ion-toolbar color="primary">
+
+
+
+		<ion-buttons left>
+			<ion-title  >Demo App</ion-title>
+		</ion-buttons>
+
+		<ion-buttons end>
+			<button ion-button icon-only (click)="signOut()">
+				<ion-icon name="log-out" ios="ios-log-out" md="md-log-out"></ion-icon>
+			</button>
+		</ion-buttons>
+
+	</ion-toolbar>
+
+
 </ion-header>
 
 <ion-content padding>
 	
-Welcome User
+	Welcome Guest
+	<br >
+
+	<ion-row>
+		<ion-col>
+			<button ion-button full (click)="takePhoto()">
+				<ion-icon ios="ios-camera" md="md-camera">
+					Take Picture
+				</ion-icon>
+			</button>
+		</ion-col>
+	</ion-row>
+	
+	<ion-row>
+		<ion-col>
+			<img [src]="base64Image" *ngIf="base64Image"/>
+			<br >
+			<button ion-button (click)="upload()" *ngIf="base64Image">Upload to Firebase!</button>
+		</ion-col>
+	</ion-row>
+
 </ion-content>
