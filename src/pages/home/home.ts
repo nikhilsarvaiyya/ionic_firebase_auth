@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -16,7 +16,8 @@ export class HomePage {
 	constructor(
 		public navCtrl: NavController,
 		public afAuth : AngularFireAuth,
-		private camera: Camera
+		private camera: Camera,
+		public alertCtrl: AlertController,
 
 		) {
 		this.images = [];
@@ -73,9 +74,22 @@ export class HomePage {
 
 		imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
 			// Do something here when the data is succesfully uploaded!
+			 this.showSuccesfulUploadAlert();
 		});
 
 	}
+
+	showSuccesfulUploadAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Uploaded!',
+      subTitle: 'Picture is uploaded to Firebase',
+      buttons: ['OK']
+    });
+    alert.present();
+
+    // clear the previous photo data in the variable
+    this.base64Image = "";
+  }
 
 
 
