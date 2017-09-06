@@ -44,16 +44,19 @@ export class LoginPage {
 	emailLogin(email:string, password:string) {
 		let loading = this.loadingCtrl.create({ content: 'Loading...' });
 		loading.present();
+		setTimeout(function () {
+			loading.dismiss();
+		}, 3000);
+		
 		return this.afAuth.auth.signInWithEmailAndPassword(email, password)
 		.then((user) => {
-			this.authState = user
+			this.authState = user;
 			loading.dismiss();
 			this.presentToast("Login Successfully.");
 			this.navCtrl.pop();
 			
 		})
 		.catch((error) => {
-			loading.dismiss();
 			console.log(error);
 			this.presentToast("Incorrect Credientials.");
 		})
@@ -75,6 +78,45 @@ export class LoginPage {
 			}).catch(ns=>{
 				loading.dismiss();
 				this.presentToast("Something went wrong. ");
+			})
+		})
+	}
+	facebookLogin(){
+		let loading = this.loadingCtrl.create({ content: 'Loading...' });
+		loading.present();
+
+		let provider = new firebase.auth.FacebookAuthProvider();
+
+
+		firebase.auth().signInWithRedirect(provider).then(()=>{
+			firebase.auth().getRedirectResult().then((result)=>{
+				loading.dismiss();
+				this.presentToast("Login Successfully...!");
+				console.log(JSON.stringify(result));
+
+			}).catch(function(error){
+				loading.dismiss();
+				this.presentToast("Something went wrong. ");
+				console.log(JSON.stringify(error));
+			})
+		})
+	}
+
+	twitterLogin(){
+		let loading = this.loadingCtrl.create({ content: 'Loading...' });
+		loading.present();
+
+		let provider = new firebase.auth.TwitterAuthProvider();
+		firebase.auth().signInWithRedirect(provider).then(()=>{
+			firebase.auth().getRedirectResult().then((result)=>{
+				loading.dismiss();
+				this.presentToast("Login Successfully...!");
+				console.log(JSON.stringify(result));
+
+			}).catch(function(error){
+				loading.dismiss();
+				this.presentToast("Something went wrong. ");
+				console.log(JSON.stringify(error));
 			})
 		})
 	}

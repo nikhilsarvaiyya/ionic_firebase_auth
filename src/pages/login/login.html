@@ -8,24 +8,39 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding color="primary">
 	<form>
 		<ion-row>
+			<ion-col center>
+				<img src="assets/logo.png" class="logo">
+			</ion-col>
+		</ion-row>
+		<ion-row>
 			<ion-col>
-				<ion-input type="text" name="email" [(ngModel)]="email" placeholder="email" ></ion-input>
+				<ion-list>
+					<ion-item>
+						<ion-input type="text" name="email" [(ngModel)]="email" placeholder="email" ></ion-input>
+					</ion-item>
+				</ion-list>
+				
+
+				<ion-list>
+					<ion-item>
+						<ion-input type="password" name="password" [(ngModel)]="password"  placeholder="password"></ion-input>
+					</ion-item>
+				</ion-list>
 			</ion-col>
 		</ion-row>
 
 		<ion-row>
+			<ion-col col-3></ion-col>
 			<ion-col>
-				<ion-input type="password" name="password" [(ngModel)]="password"  placeholder="password"></ion-input>
+				<button full ion-button round (click)="emailLogin(email,password )"> Login </button>
 			</ion-col>
+			<ion-col col-3></ion-col>
 		</ion-row>
-
-		<ion-row>
-			<ion-col>
-				<button ion-button  (click)="emailLogin(email,password )"> Login </button>
-			</ion-col>
+		<!-- <ion-row>
+			<ion-col col-3></ion-col>
 			<ion-col>
 				<button ion-button full (click)="OTP()">
 					<ion-icon name="egg" >
@@ -33,35 +48,39 @@
 					</ion-icon>
 				</button>
 			</ion-col>
-		</ion-row>
+			<ion-col col-3></ion-col>
+		</ion-row> -->
 	</form>
-
 	<ion-row>
 		<ion-col>
-			<button ion-button full (click)="gmailLogin()">
-				<ion-icon ios="logo-google" md="logo-google">
-					
-				</ion-icon>
-			</button>
+			
+		</ion-col>
+		<ion-col col-auto>
+			<span style="font-size:10px; color:gray">OR CONNECT WITH</span>
 		</ion-col>
 		<ion-col>
-			<button ion-button full (click)="twitterLogin()">
-				<ion-icon ios="logo-twitter" md="logo-twitter">
-					
-				</ion-icon>
+			
+		</ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-col col-4>
+			<button ion-button round full (click)="gmailLogin()" color="gmail">
+				<ion-icon ios="logo-google" md="logo-google"></ion-icon> 
+				<span style="font-size: 10px; margin: 0 3px">Google</span>
 			</button>
 		</ion-col>
-		<ion-col>
-			<button ion-button full (click)="facebookLogin()">
-				<ion-icon ios="logo-facebook" md="logo-facebook">
-					
-				</ion-icon>
+		<ion-col col-4>
+			<button ion-button round full (click)="twitterLogin()" color="twitter">
+				<ion-icon ios="logo-twitter" md="logo-twitter"></ion-icon> 
+				<span style="font-size: 10px; margin: 0 3px">Twitter</span>
+			</button>
+		</ion-col>
+		<ion-col col-4>
+			<button ion-button round full (click)="facebookLogin()" color="facebook">
+				<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> 
+				<span style="font-size: 10px; margin: 0 3px">Facebook</span>
 			</button>
 		</ion-col>
 	</ion-row>
 	
-
-	
-
-
 </ion-content>

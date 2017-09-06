@@ -1,37 +1,28 @@
 <ion-header>
 	<ion-toolbar color="primary">
-
-
-
-		<ion-buttons left>
-			<ion-title  >Demo App</ion-title>
-		</ion-buttons>
-
+		<ion-title  >VAST</ion-title>
 		<ion-buttons end>
+			<button ion-button icon-only (click)="takePhoto()">
+				<ion-icon name="camera" ios="ios-camera" md="md-camera"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-buttons end *ngIf="userDetail != 'null'">
 			<button ion-button icon-only (click)="signOut()">
 				<ion-icon name="log-out" ios="ios-log-out" md="md-log-out"></ion-icon>
 			</button>
 		</ion-buttons>
-
+		<ion-buttons end *ngIf="userDetail == 'null'">
+			<button ion-button icon-only (click)="signIn()">
+				<ion-icon name="log-in" ios="ios-log-in" md="md-log-in"></ion-icon>
+			</button>
+		</ion-buttons>
 	</ion-toolbar>
-
-
+	<ion-toolbar *ngIf="userDetail">
+		<span style="font-size: 12px">Welome <strong>{{userDetail.email}}</strong></span>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-	
-	Welcome Guest
-	<br >
-
-	<ion-row>
-		<ion-col>
-			<button ion-button full (click)="takePhoto()">
-				<ion-icon ios="ios-camera" md="md-camera">
-					Take Picture
-				</ion-icon>
-			</button>
-		</ion-col>
-	</ion-row>
 	
 	<ion-row>
 		<ion-col>
@@ -40,5 +31,12 @@
 			<button ion-button (click)="upload()" *ngIf="base64Image">Upload to Firebase!</button>
 		</ion-col>
 	</ion-row>
+
+	<ion-list>
+		<ion-item *ngFor="let item of fireImageCollection;let i = index">
+			<p>{{i}} - {{item.name}}</p>
+			<img src="item.URL" >
+		</ion-item>
+	</ion-list>
 
 </ion-content>

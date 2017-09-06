@@ -34,11 +34,14 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+primary:    #4C80BE,
+secondary:  #4BA9C6,
+danger:     #f53d3d,
+light:      #f4f4f4,
+dark:       #222,
+facebook:#3960A5,
+gmail : #D9372C,
+twitter : #19BFE5,
 );
 
 
@@ -53,6 +56,16 @@ $colors: (
 // --------------------------------------------------
 // Material Design only Sass variables can go here
 
+$primary: #4C80BE ;
+$secondary: #4BA9C6;
+$danger: #FD1919 ;
+$light: #e5e5e5 ;
+$dark: #111111 ;
+$gray: #e5e5e5;
+
+$facebook:#3960A5;
+$gmail : #D9372C;
+$twitter : #19BFE5;
 
 
 

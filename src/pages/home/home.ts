@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController } from 'ionic-angular';
+import { NavController, AlertController, ToastController,LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -13,26 +13,29 @@ import { LoginPage } from '../login/login'
 export class HomePage {
 	images: Array<{src: String}>;
 	base64Image : any;
+	userDetail : any;
+
 	constructor(
 		public navCtrl: NavController,
 		public afAuth : AngularFireAuth,
 		private camera: Camera,
 		public alertCtrl: AlertController,
+		public toastCtrl: ToastController,
+		public loadingCtrl: LoadingController,
 
 		) {
 		this.images = [];
+		this.userDetail = JSON.parse(window.localStorage.getItem('userDetails'));
 
-		if(!this.isLoggedIn()){
-			window.localStorage.removeItem('currentUser')
-			console.log("You are not Logged In");
+		
+		
+		if(this.userDetail == null || this.userDetail == "null"){
 			this.navCtrl.push(LoginPage);
 		}
 	}
 
-	isLoggedIn(){
-		if(window.localStorage.getItem('currentUser')){
-			return true
-		}
+	signIn(){
+		this.navCtrl.push(LoginPage);
 	}
 
 	signOut(): void {
@@ -65,6 +68,8 @@ export class HomePage {
 	}
 
 	upload() {
+		let loading = this.loadingCtrl.create({ content: 'Uploading...' });
+		loading.present();
 		let storageRef = firebase.storage().ref();
 		// Create a timestamp as filename
 		const filename = Math.floor(Date.now() / 1000);
@@ -74,22 +79,30 @@ export class HomePage {
 
 		imageRef.putString(this.base64Image, firebase.storage.StringFormat.DATA_URL).then((snapshot)=> {
 			// Do something here when the data is succesfully uploaded!
-			 this.showSuccesfulUploadAlert();
+			loading.dismiss();
+			this.presentAlert("Picture is uploaded to Firebase");
+			this.base64Image = "";
 		});
 
 	}
 
-	showSuccesfulUploadAlert() {
-    let alert = this.alertCtrl.create({
-      title: 'Uploaded!',
-      subTitle: 'Picture is uploaded to Firebase',
-      buttons: ['OK']
-    });
-    alert.present();
+	
+	presentAlert(text) {
+		let alert = this.alertCtrl.create({
+			title: text,
+			buttons: ['OK']
+		});
+		alert.present();
+	}
 
-    // clear the previous photo data in the variable
-    this.base64Image = "";
-  }
+	presentToast(msg) {
+		let toast = this.toastCtrl.create({
+			message: msg,
+			duration: 3000,
+			position: "center"
+		});
+		toast.present();
+	}
 
 
 
