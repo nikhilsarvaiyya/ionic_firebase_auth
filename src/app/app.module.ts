@@ -4,17 +4,23 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+
+
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera } from '@ionic-native/camera';
+
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import firebase from 'firebase'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login'
+ 
+ import { Facebook } from '@ionic-native/facebook';
  
 export const firebaseConfig = {
   apiKey: "AIzaSyDgT2-BXHMbR9-E-z_Nb5JVizRqNSj_d3A",
@@ -36,6 +42,8 @@ firebase.initializeApp(firebaseConfig)
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -49,9 +57,8 @@ firebase.initializeApp(firebaseConfig)
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     GooglePlus,
-    AngularFireAuth,
-    AngularFireDatabase,
-    Camera
+    Camera,
+    Facebook
    
   ]
 })

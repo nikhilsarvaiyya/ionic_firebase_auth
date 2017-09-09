@@ -1,14 +1,19 @@
 
 <ion-header>
 
-	<ion-navbar color="primary">
-		<ion-title>login</ion-title>
-	</ion-navbar>
+	<ion-toolbar color="primary">
+		<ion-title text-center >Login</ion-title>
+	</ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding color="primary">
+<ion-list>
+		<ion-item class="text" *ngFor="let item of items | async">
+			{{item.$value}}
+		</ion-item>
+	</ion-list>
 	<form>
 		<ion-row>
 			<ion-col center>
@@ -42,14 +47,11 @@
 		<!-- <ion-row>
 			<ion-col col-3></ion-col>
 			<ion-col>
-				<button ion-button full (click)="OTP()">
-					<ion-icon name="egg" >
-						Generate OPT
-					</ion-icon>
-				</button>
+				<button ion-button outline (click)="signInWithFacebook()">Login</button>  
+				<button ion-button outline (click)="signOut()">Logout</button>
 			</ion-col>
 			<ion-col col-3></ion-col>
-		</ion-row> -->
+		</ion-row>  -->
 	</form>
 	<ion-row>
 		<ion-col>
@@ -76,7 +78,7 @@
 			</button>
 		</ion-col>
 		<ion-col col-4>
-			<button ion-button round full (click)="facebookLogin()" color="facebook">
+			<button ion-button round full (click)="signInWithFacebook()" color="facebook">
 				<ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> 
 				<span style="font-size: 10px; margin: 0 3px">Facebook</span>
 			</button>
